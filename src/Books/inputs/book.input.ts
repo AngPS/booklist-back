@@ -9,3 +9,13 @@ export class BookInput {
     @Field()
     readonly summary: string;
 }
+
+@InputType()
+export class BookFindInput {
+    @Field({ nullable: true })
+    readonly title: string;
+    @Field({ nullable: true })
+    readonly author: string;
+    @Field({ nullable: true })
+    readonly summary: string;
+}

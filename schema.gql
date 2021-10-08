@@ -3,23 +3,49 @@
 # ------------------------------------------------------
 
 type CreateBookDto {
-  id: ID!
+  _id: ID!
   title: String!
   author: String!
   summary: String!
 }
 
+type CreateUserDto {
+  _id: ID
+  name: String
+  statusID: String
+}
+
 type Query {
   hello: String!
   books: [CreateBookDto!]!
+  findBookByTitle(input: BookFindInput!): CreateBookDto
+  Users: [CreateUserDto!]!
+  findUser(input: UserFindInput!): CreateUserDto
+}
+
+input BookFindInput {
+  title: String
+  author: String
+  summary: String
+}
+
+input UserFindInput {
+  name: String
+  statusID: [String!]
 }
 
 type Mutation {
   createBook(input: BookInput!): CreateBookDto!
+  createUser(input: UserInput!): CreateUserDto!
 }
 
 input BookInput {
   title: String!
   author: String!
   summary: String!
+}
+
+input UserInput {
+  name: String!
+  statusID: String
 }

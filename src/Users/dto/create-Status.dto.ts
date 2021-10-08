@@ -1,13 +1,13 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
 
 @ObjectType()
-export class CreateBookDto {
+export class CreateStatusDto {
     @Field(() => ID)
     readonly _id: string;
     @Field()
-    readonly title: string;
+    readonly userID: string;
     @Field()
-    readonly author: string;
+    readonly bookID: string;
     @Field()
-    readonly summary: string;
+    readonly status: string;
 }
