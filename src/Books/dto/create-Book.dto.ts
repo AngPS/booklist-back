@@ -11,3 +11,15 @@ export class CreateBookDto {
     @Field()
     readonly summary: string;
 }
+
+@ObjectType()
+export class FindBookDto {
+    @Field(() => ID, { nullable: true })
+    readonly _id: string;
+    @Field({ nullable: true })
+    readonly title: string;
+    @Field({ nullable: true })
+    readonly author: string;
+    @Field({ nullable: true })
+    readonly summary: string;
+}

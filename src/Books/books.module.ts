@@ -10,5 +10,8 @@ import { BooksService } from './books.service';
         MongooseModule.forFeature([{ name: Book.name, schema: BookSchema }]),
     ],
     providers: [BooksResolver, BooksService],
+    exports:[
+        BooksService
+    ],
 })
 export class BooksModule {};

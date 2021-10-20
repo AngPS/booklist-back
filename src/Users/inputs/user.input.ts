@@ -12,16 +12,21 @@ export class UserInput {
 export class UserFindInput {
     @Field(() => String, { nullable: true })
     readonly name?: string;
-    @Field(() => [String], { nullable: true })
-    readonly statusID?: string[];
 }
 
 @InputType()
-export class UserUpdateInput {
-    @Field(() => String)
-    _id: string
+export class CreateUserStatusInput {
     @Field(() => String, { nullable: true })
-    readonly name?: string;
-    @Field(() => [String], { nullable: true })
-    readonly statusID?: string[];
+    readonly userID: string;
+    @Field(() => String, { nullable: true })
+    readonly bookID: string;
 }
+
+@InputType()
+export class DeleteUserStatusInput {
+    @Field()
+    readonly userID: string;
+    @Field()
+    readonly statusID: string;
+}
+

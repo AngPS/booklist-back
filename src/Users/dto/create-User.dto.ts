@@ -1,6 +1,6 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
-import { isNullableType } from 'graphql';
 import { Status } from '../schemas/statuses.schema';
+import { QueryStatusDto } from './create-status.dto';
 
 
 @ObjectType()
@@ -9,6 +9,6 @@ export class CreateUserDto {
     readonly _id: string;
     @Field({ nullable: true })
     readonly name: string;
-    @Field({ nullable: true })
-    readonly statusID?: string;
+    @Field(type => [QueryStatusDto], { nullable: true})
+    readonly status?: Status[];
 }

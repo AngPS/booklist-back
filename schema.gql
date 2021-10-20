@@ -9,18 +9,40 @@ type CreateBookDto {
   summary: String!
 }
 
+type FindBookDto {
+  _id: ID
+  title: String
+  author: String
+  summary: String
+}
+
+type CreateStatusDto {
+  _id: ID
+  bookID: CreateBookDto
+  status: String
+}
+
+type QueryStatusDto {
+  _id: ID
+  bookID: FindBookDto
+  status: String
+}
+
 type CreateUserDto {
   _id: ID
   name: String
-  statusID: String
+  status: [QueryStatusDto!]
 }
 
 type Query {
   hello: String!
   books: [CreateBookDto!]!
-  findBookByTitle(input: BookFindInput!): CreateBookDto
+  findBookByTitle(input: BookFindInput!): FindBookDto
   Users: [CreateUserDto!]!
   findUser(input: UserFindInput!): CreateUserDto
+  Status: [CreateStatusDto!]!
+  findStatus(input: StatusFindInput!): CreateStatusDto!
+  findByBookID(input: StatusFindBookInput!): CreateStatusDto!
 }
 
 input BookFindInput {
@@ -31,12 +53,24 @@ input BookFindInput {
 
 input UserFindInput {
   name: String
-  statusID: [String!]
+}
+
+input StatusFindInput {
+  statusID: String
+}
+
+input StatusFindBookInput {
+  bookID: String
 }
 
 type Mutation {
   createBook(input: BookInput!): CreateBookDto!
   createUser(input: UserInput!): CreateUserDto!
+  addUserStatus(input: CreateUserStatusInput!): CreateUserDto!
+  deleteUserStatus(input: DeleteUserStatusInput!): CreateUserDto!
+  createStatus(input: StatusInput!): CreateStatusDto!
+  updateStatus(input: StatusUpdateInput!): CreateStatusDto!
+  deleteStatus(input: StatusFindInput!): CreateStatusDto!
 }
 
 input BookInput {
@@ -48,4 +82,24 @@ input BookInput {
 input UserInput {
   name: String!
   statusID: String
+}
+
+input CreateUserStatusInput {
+  userID: String
+  bookID: String
+}
+
+input DeleteUserStatusInput {
+  userID: String!
+  statusID: String!
+}
+
+input StatusInput {
+  bookID: String!
+  status: String
+}
+
+input StatusUpdateInput {
+  statusID: String!
+  status: String!
 }
